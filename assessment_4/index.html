@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.5.2/dist/web3.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assessment-4</title>
+        <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        header {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+        main {
+            padding: 20px;
+        }
+        .token-info {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .token-info h2 {
+            color: #007bff;
+            margin-top: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        .token-info p {
+            padding: 5px 0;
+        }
+        .token-info .label {
+            font-weight: bold;
+        }
+        footer {
+            background-color: #007bff;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Token Information</h1>
+    </header>
+    <main>
+        <div class="token-info">
+            <h2>Token Name</h2>
+            <p class="label">Name:</p>
+            <p class="token-name"></p>
+
+            <h2>Token Symbol</h2>
+            <p class="label">Symbol:</p>
+            <p class="token-symbol"></p>
+
+            <h2>Total Supply</h2>
+            <p class="label">Total Supply:</p>
+            <p class="total-supply"></p>
+
+        </div>
+    </main>
+    <footer>
+        <p>&hearts; Created by GeekyHichambel &hearts;</p>
+    </footer>
+    
+      <script>
+        const contractAddress = '0xadb36749136267619db3b8a456CBcEb8854E29C2'; 
+        const contractABI =
+            [
+	{
+		"inputs": [],
+		"name": "get_name",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "get_symbol",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "get_token_supply",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	}
+];
+          
+        const web3 = new Web3('https://eth-sepolia.g.alchemy.com/v2/wHOfYhc-M1W9Luo5zSJZKKHL_CJWpoo3');
+
+        const contract = new web3.eth.Contract(contractABI, contractAddress);
+
+           async function fetchTokenInfo() {
+           try {
+            const tokenName = await contract.methods.get_name().call();
+            const tokenSymbol = await contract.methods.get_symbol().call();
+            const totalSupply = await contract.methods.get_token_supply().call();
+
+            document.querySelector('.token-name').textContent = tokenName;
+            document.querySelector('.token-symbol').textContent = tokenSymbol;
+            document.querySelector('.total-supply').textContent = totalSupply;
+            } catch (error) {
+                console.error("Error fetching token information:", error);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchTokenInfo();
+        });
+    </script>
+</body>
+</html>
