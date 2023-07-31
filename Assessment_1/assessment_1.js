@@ -33,10 +33,3 @@ function getTotalSupply() {
     var total_supply = nft_storage.length;
     console.log("Total minted nfts are: " + (total_supply));
 }
-
-mintNFT("Mercedes", "S", "G WAGON", 4.7);
-mintNFT("Toyota", "A", "SUPRA", 4.9);
-mintNFT("Dodge", "A", "Challenger",4.2);
-
-listNFTs();
-getTotalSupply();
