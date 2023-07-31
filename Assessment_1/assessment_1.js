@@ -16,7 +16,7 @@ function mintNFT (brand, standard, name, rating) {
 
 // This function will get the details of our stored nfts.
 function listNFTs () {
-    console.log("NFT details are listed below:\n");
+    console.log("\nNFT details are listed below:\n");
 
     for (var i=0; i < nft_storage.length; i++){
         console.log("NFT " + (i+1) + "\n");
@@ -33,3 +33,11 @@ function getTotalSupply() {
     var total_supply = nft_storage.length;
     console.log("Total minted nfts are: " + (total_supply));
 }
+
+var b = prompt("Enter Brand Name : ");
+var s = prompt("Enter Standard : ");
+var n = prompt("Enter Car Name : ");
+var r = prompt("Enter Rating : ");
+mintNFT(b,s,n,r);
+listNFTs();
+getTotalSupply();
